@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "12648359321",
+    "firebase_url": "https://safemed-5a075-default-rtdb.firebaseio.com",
+    "project_id": "safemed-5a075",
+    "storage_bucket": "safemed-5a075.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12648359321:android:f9a6ca5c0474fcf1799f08",
+        "android_client_info": {
+          "package_name": "com.example.safemed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12648359321-bm158l88k0nlppj28n522v4kakaada4k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAurQusdj-_LsETpSi0J-AHZTZjSFgTB7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12648359321-bm158l88k0nlppj28n522v4kakaada4k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
