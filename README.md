@@ -1,5 +1,5 @@
- SafeMed
-This is a android app to prevent users from using counterfiet medcines and also to contact fake dealers for essentials.
+ # SafeMed
+  This is a android app to prevent users from using counterfiet medcines and also to contact fake dealers for essentials.
 
 ## Description
   ### Problem Statement
@@ -47,12 +47,15 @@ This is a android app to prevent users from using counterfiet medcines and also 
      * *Training Accuracy* - 82%
      * *Validation Accuracy* - 80%
          
- ###### Example of working model to solve first two problems:
+ #### Example of working model to solve first two problems:
 
      
 
 
-
+#### Impoartan Features of our model:
+  One-Shot Learning : Our model is able to correctly predicting the similarity of between the images of new classes.
+  
+  Flexibility : Our model is invariant to changes is light, and slight rotation.
 
 ### Solution of 3rd Problem:
 
