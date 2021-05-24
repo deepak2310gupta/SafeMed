@@ -1,41 +1,40 @@
-package com.example.safemed;
+package com.example.safemed.ActivitesCollection;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
-public class SplashActivity extends AppCompatActivity {
-    TextView SafeMedTitle;
+import com.example.safemed.R;
+
+public class NoInternet extends AppCompatActivity {
+
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        SafeMedTitle = findViewById(R.id.SafeMedTitle);
+        setContentView(R.layout.activity_no_internet);
 
-        new Handler().postDelayed(new Runnable() {
+        swipeRefreshLayout = findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void run() {
-
+            public void onRefresh() {
                 if (haveNetwork()) {
-                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    Intent intent = new Intent(NoInternet.this, SplashActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (!haveNetwork()) {
-                    Intent intent = new Intent(SplashActivity.this, NoInternet.class);
+                    Intent intent = new Intent(NoInternet.this, NoInternet.class);
                     startActivity(intent);
+                    finish();
                 }
             }
-        }, 3105);
-        Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-        findViewById(R.id.cardSplash).startAnimation(animZoomIn);
+        });
     }
 
     private boolean haveNetwork() {

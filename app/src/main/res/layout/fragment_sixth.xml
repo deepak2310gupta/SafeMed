@@ -101,7 +101,7 @@
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/buttonsbg"
                 android:fontFamily="@font/amiko_semibold"
-                android:text="Predict Medicine"
+                android:text="Authenticate Medicine"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -115,7 +115,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/medicineone"
+                    android:src="@drawable/medtocilone"
                     android:visibility="gone" />
 
                 <ImageView
@@ -123,7 +123,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/medicinetwo"
+                    android:src="@drawable/medtocilsecond"
                     android:visibility="gone" />
 
                 <ImageView
@@ -131,7 +131,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/medicinethree"
+                    android:src="@drawable/medtocilthree"
                     android:visibility="gone" />
             </LinearLayout>
 

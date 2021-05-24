@@ -61,7 +61,8 @@ public class ResultSecondFragment extends Fragment {
             answersImageWrongn.setVisibility(View.GONE);
             textViewResultsDescn.setTextColor(getResources().getColor(R.color.correct));
             textViewResultsDescn.setText("The Medicine Is Genuine");
-        } else {
+        }
+        else {
             answersImageWrongn.setVisibility(View.VISIBLE);
             answersImageCorrectn.setVisibility(View.GONE);
             textViewResultsDescn.setTextColor(getResources().getColor(R.color.wrong));

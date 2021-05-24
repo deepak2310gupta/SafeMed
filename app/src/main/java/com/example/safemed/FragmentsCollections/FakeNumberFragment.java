@@ -105,7 +105,7 @@ public class FakeNumberFragment extends Fragment {
                 try {
 
                     JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0; i < 25; i++) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
 
                         try {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);

@@ -30,9 +30,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/autour_one"
-                android:text="SafeMed"
+                android:text="SafeMed(Remdesivir)"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="20dp"
+                android:layout_margin="3dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

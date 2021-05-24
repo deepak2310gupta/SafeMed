@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cazaea.sweetalert.SweetAlertDialog;
 import com.example.safemed.R;
 import com.example.safemed.ml.Mymodel;
 
@@ -73,15 +74,17 @@ public class SixthFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (imageFileUri6 == null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("You Have To Upload The Medicine Image To Continue");
-                    builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE);
+                    sweetAlertDialog.setContentText("You Have To Upload The Medicine Image To Continue");
+                    sweetAlertDialog.setConfirmText("Okay");
+                    sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                            sweetAlertDialog.dismissWithAnimation();
                         }
                     });
-                    builder.create().show();
+                    sweetAlertDialog.show();
                 }
                 else {
 
@@ -223,7 +226,7 @@ public class SixthFragment extends Fragment {
             square += Math.pow((arr1[i] - arr2[i]), 2);
         }
 
-        root = (float) Math.sqrt(mean);
+        root = (float) Math.sqrt(square);
 
         return root;
     }

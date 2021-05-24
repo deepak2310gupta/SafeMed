@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".NoInternet" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".ActivitesCollection.NoInternet" />
+        <activity android:name=".ActivitesCollection.DashboardActivity" />
+        <activity android:name=".ActivitesCollection.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

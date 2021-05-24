@@ -1,4 +1,4 @@
-package com.example.safemed;
+package com.example.safemed.ActivitesCollection;
 
 import android.os.Bundle;
 
@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.safemed.FragmentsCollections.FakeMedicineFragment;
 import com.example.safemed.FragmentsCollections.FakeNumberFragment;
+import com.example.safemed.R;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class DashboardActivity extends AppCompatActivity {
