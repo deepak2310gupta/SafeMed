@@ -1,32 +1,33 @@
 package com.example.safemed.FragmentsCollections;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.safemed.R;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import static android.content.Context.MODE_PRIVATE;
+import com.bumptech.glide.Glide;
+import com.example.safemed.R;
 
 
 public class FakeMedicineFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
-    String[] medicineslist = {"Please Select Medicine Type", "Remdesivir", "Tocilizumab"};
+    String[] medicineslist = {"Please select the Medicine To Authenticate", "Remdesivir", "Tocilizumab"};
     Button uploadImagesButton;
     Spinner spin;
+    ImageView represenatation;
+
 
     public FakeMedicineFragment() {
     }
@@ -37,9 +38,15 @@ public class FakeMedicineFragment extends Fragment implements AdapterView.OnItem
 
 
         View view = inflater.inflate(R.layout.fragment_fake_medicine, container, false);
-
-
         uploadImagesButton = view.findViewById(R.id.uploadImagesButton);
+        represenatation = (ImageView) view.findViewById(R.id.represenatation);
+
+
+        Glide.with(getContext()).load(R.drawable.safingmed).into(represenatation);
+
+
+
+
 
         spin = view.findViewById(R.id.medicinespinner);
         spin.setOnItemSelectedListener(this);
@@ -49,16 +56,12 @@ public class FakeMedicineFragment extends Fragment implements AdapterView.OnItem
         uploadImagesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Spinner mySpinner = (Spinner) view.findViewById(R.id.medicinespinner);
                 int selectedItemOfMySpinner = mySpinner.getSelectedItemPosition();
                 String actualPositionOfMySpinner = (String) mySpinner.getItemAtPosition(selectedItemOfMySpinner);
-
                 if (selectedItemOfMySpinner <= 0) {
-                    setSpinnerError(mySpinner, "Field Can't Be Empty");
+                    setSpinnerError(mySpinner, "Field Can Not Be Empty");
                 } else {
-
                     if (actualPositionOfMySpinner.equals("Remdesivir")) {
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         MedicineDetectionOneFragment medicineDetectionOneFragment = new MedicineDetectionOneFragment();
@@ -74,7 +77,6 @@ public class FakeMedicineFragment extends Fragment implements AdapterView.OnItem
 
             }
         });
-
 
         return view;
     }

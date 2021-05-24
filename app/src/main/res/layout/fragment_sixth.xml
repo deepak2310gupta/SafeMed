@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#0B3867">
+        android:background="#1BABE4">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/arapey"
+                android:fontFamily="@font/autour_one"
                 android:text="SafeMed"
                 android:textColor="@color/white"
                 android:textSize="25dp"
@@ -45,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/arapey"
-                android:text="Components Image (Tocilizumab)"
-                android:textColor="#0B3867"
+                android:text="Medicine Image (Tocilizumab)"
+                android:textColor="#1BABE4"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -65,16 +65,18 @@
         <ImageView
             android:id="@+id/medicineimageview6"
             android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:layout_marginLeft="5dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="2dp"
             android:layout_weight="0.6" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
             android:layout_weight="0.4"
             android:orientation="vertical">
 
@@ -102,6 +104,39 @@
                 android:text="Predict Medicine"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/test4n"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/medicineone"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/test5n"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/medicinetwo"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/test6n"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/medicinethree"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
     </LinearLayout>

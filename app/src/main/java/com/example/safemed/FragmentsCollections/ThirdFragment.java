@@ -1,20 +1,13 @@
 package com.example.safemed.FragmentsCollections;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,41 +15,36 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.safemed.ModelMember;
-import com.example.safemed.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import java.io.File;
+import com.cazaea.sweetalert.SweetAlertDialog;
+import com.example.safemed.R;
+
+import com.example.safemed.ml.Mymodel;
+
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.ByteBuffer;
 
 
 public class ThirdFragment extends Fragment {
 
 
-
     Bitmap bmp3;
-    ImageView medicineimageview3,test2,test1,test3;
-    Button selectButton3,predictButton;
+    ImageView medicineimageview3, test2, test1, test3;
+    Button selectButton3, predictButton;
     Uri imageFileUri3;
 
-    String oneUri,secUri;
-    ArrayList<ModelMember>modelMemberArrayList;
-
-
+    double array1[] = new double[224];
+    double array2[] = new double[224];
+    double array3[] = new double[224];
+    double comparearray[] = new double[224];
+    ProgressDialog progressDialog;
     public ThirdFragment() {
 
     }
@@ -65,103 +53,179 @@ public class ThirdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.fragment_third, container, false);
-        medicineimageview3=view.findViewById(R.id.medicineimageview3);
+        View view = inflater.inflate(R.layout.fragment_third, container, false);
+        medicineimageview3 = view.findViewById(R.id.medicineimageview3);
 
-        modelMemberArrayList=new ArrayList<>();
-        selectButton3=view.findViewById(R.id.selectButton3);
-        predictButton=view.findViewById(R.id.predictButton);
-        test1=view.findViewById(R.id.test1);
-        test2=view.findViewById(R.id.test2);
-        test3=view.findViewById(R.id.test3);
-        Bundle bundle = this.getArguments();
+        selectButton3 = view.findViewById(R.id.selectButton3);
+        predictButton = view.findViewById(R.id.predictButton);
+        test1 = view.findViewById(R.id.test1);
+        test2 = view.findViewById(R.id.test2);
+        test3 = view.findViewById(R.id.test3);
+        progressDialog=new ProgressDialog(getContext());
 
-        if(bundle != null){
-            oneUri=getArguments().getString("uriFirst");
-            secUri=getArguments().getString("uriSecond");
+        Bitmap bitmap = ((BitmapDrawable)test1.getDrawable()).getBitmap();
+
+        bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+
+        try {
+            Mymodel model = Mymodel.newInstance(getContext());
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+            TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+            tensorImage.load(bitmap);
+            ByteBuffer byteBuffer = tensorImage.getBuffer();
+            inputFeature0.loadBuffer(byteBuffer);
+            Mymodel.Outputs outputs = model.process(inputFeature0);
+            TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+            for (int i = 0; i < 224; i++) {
+                array1[i] = outputFeature0.getFloatArray()[i];
+            }
+            model.close();
+
         }
+        catch (IOException e) {
+
+            Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
         selectButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent intent2 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent2.setType("image/*");
-                startActivityForResult(intent2,300);
+                startActivityForResult(intent2, 300);
             }
         });
-
         predictButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                 if(imageFileUri3==null){
 
-                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("You Have To Upload The Components Image To Continue");
-                    builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                if (imageFileUri3 == null) {
+
+                    SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE);
+                    sweetAlertDialog.setContentText("You Have To Upload The Medicine Image To Continue");
+                    sweetAlertDialog.setConfirmText("Okay");
+                    sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                            sweetAlertDialog.dismissWithAnimation();
                         }
                     });
-                    builder.create().show();
+                    sweetAlertDialog.show();
                 }
+                else {
+                    predictButton.setText("Authenticating Medicine...");
+                    progressDialog.setTitle("Authenticating Medicine");
+                    progressDialog.setMessage("Please Wait.....");
+                    progressDialog.show();
 
-                 else{
-                    loadImages();
+                    Bitmap bitmap2= ((BitmapDrawable)test2.getDrawable()).getBitmap();
+                    Bitmap bitmap3= ((BitmapDrawable)test3.getDrawable()).getBitmap();
+                    bitmap2 = Bitmap.createScaledBitmap(bitmap2, 224, 224, true);
+                    bitmap3 = Bitmap.createScaledBitmap(bitmap3, 224, 224, true);
+
+                    try {
+                        Mymodel model = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+                        tensorImage.load(bitmap2);
+                        ByteBuffer byteBuffer = tensorImage.getBuffer();
+                        inputFeature0.loadBuffer(byteBuffer);
+                        Mymodel.Outputs outputs = model.process(inputFeature0);
+                        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            array2[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    try {
+                        Mymodel model = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+                        tensorImage.load(bitmap3);
+                        ByteBuffer byteBuffer = tensorImage.getBuffer();
+                        inputFeature0.loadBuffer(byteBuffer);
+                        Mymodel.Outputs outputs = model.process(inputFeature0);
+                        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            array3[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    bmp3 = Bitmap.createScaledBitmap(bmp3, 224, 224, true);
+
+
+                    try {
+                        Mymodel model1 = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature01 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage1 = new TensorImage(DataType.FLOAT32);
+                        tensorImage1.load(bmp3);
+                        ByteBuffer byteBuffer1 = tensorImage1.getBuffer();
+                        inputFeature01.loadBuffer(byteBuffer1);
+                        Mymodel.Outputs outputs1 = model1.process(inputFeature01);
+                        TensorBuffer outputFeature0 = outputs1.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            comparearray[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model1.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                    double myFinalAnswer1=rmsValue(array1,comparearray);
+                    double myFinalAnswer2=rmsValue(array2,comparearray);
+                    double myFinalAnswer3=rmsValue(array3,comparearray);
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("myTrainingModelValue1",myFinalAnswer1);
+                    bundle.putDouble("myTrainingModelValue2",myFinalAnswer2);
+                    bundle.putDouble("myTrainingModelValue3",myFinalAnswer3);
+
+                    ResultFragment fragment2 = new ResultFragment();
+                    fragment2.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.collectionfragmentsReplacer, fragment2).commit();
+                    progressDialog.dismiss();
 
                 }
-
             }
         });
-
-
 
         return view;
     }
 
-    private void loadImages() {
-
-        for (int i = 1; i < 4; i++) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference("remdesivir/rem" + i + ".jpeg");
-
-            try {
-                File localFile = File.createTempFile("rem" + i, "jpeg");
-                int finalI = i;
-                storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        if (finalI == 1) {
-                            test1.setImageBitmap(bitmap);
-                        }
-
-                        if (finalI == 2) {
-                            test2.setImageBitmap(bitmap);
-                        }
-
-                        if (finalI == 3) {
-                            test3.setImageBitmap(bitmap);
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
+    private StringBuffer HelpingObject(double[] array1) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < array1.length; i++)
+            stringBuffer.append(array1[i]).append(",");
+        return stringBuffer;
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 300) {
-          imageFileUri3 = data.getData();
-
+            imageFileUri3 = data.getData();
             try {
                 BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
                 bmpFactoryOptions.inJustDecodeBounds = true;
@@ -170,19 +234,26 @@ public class ThirdFragment extends Fragment {
                 bmpFactoryOptions.inJustDecodeBounds = false;
                 bmp3 = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageFileUri3), null, bmpFactoryOptions);
                 medicineimageview3.setImageBitmap(bmp3);
-                Toast.makeText(getContext(), ""+bmp3, Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 Log.v("ERROR", e.toString());
             }
         }
-
-
-
     }
 
 
+    public  double rmsValue(double arr1[], double arr2[]) {
+        double square = 0;
+        double mean = 0;
+        double root = 0;
 
+        for (int i = 0; i < 224; i++) {
+            square += Math.pow((arr1[i] - arr2[i]), 2);
+        }
 
+        root = (float) Math.sqrt(square);
+
+        return root;
+    }
 
 
 }

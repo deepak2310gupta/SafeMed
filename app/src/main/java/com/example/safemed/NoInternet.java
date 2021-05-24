@@ -19,7 +19,6 @@ public class NoInternet extends AppCompatActivity {
         setContentView(R.layout.activity_no_internet);
 
         swipeRefreshLayout = findViewById(R.id.refreshLayout);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -27,13 +26,10 @@ public class NoInternet extends AppCompatActivity {
                     Intent intent = new Intent(NoInternet.this, SplashActivity.class);
                     startActivity(intent);
                     finish();
-
                 } else if (!haveNetwork()) {
-
                     Intent intent = new Intent(NoInternet.this, NoInternet.class);
                     startActivity(intent);
                     finish();
-
                 }
             }
         });
@@ -42,12 +38,9 @@ public class NoInternet extends AppCompatActivity {
     private boolean haveNetwork() {
         boolean haveWiFi = false;
         boolean haveMobileData = false;
-
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
-
         for (NetworkInfo info : networkInfos) {
-
             if (info.getTypeName().equalsIgnoreCase("WIFI")) {
                 if (info.isConnected())
                     haveWiFi = true;
@@ -56,7 +49,6 @@ public class NoInternet extends AppCompatActivity {
                 if (info.isConnected())
                     haveMobileData = true;
             }
-
         }
         return haveMobileData | haveWiFi;
     }

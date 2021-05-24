@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/allerta_stencil</item>
         <item>@font/amiko_semibold</item>
         <item>@font/arapey</item>
         <item>@font/asap_medium</item>
         <item>@font/asul</item>
         <item>@font/autour_one</item>
         <item>@font/baloo</item>
+        <item>@font/cherry_cream_soda</item>
+        <item>@font/jockey_one</item>
+        <item>@font/lalezar</item>
     </array>
 </resources>

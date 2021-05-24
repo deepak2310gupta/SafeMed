@@ -18,13 +18,13 @@ import java.util.Date;
 public class AdapterNumberCheck extends RecyclerView.Adapter<AdapterNumberCheck.HolderNumber> implements Filterable {
 
     Context context;
-    ArrayList<ModelTweets> modelTweetsArrayList, filterList;
+    ArrayList<ModelMemberClass> modelMemberClassArrayList, filterList;
     private FilterNumber filterNumber;
 
-    public AdapterNumberCheck(Context context, ArrayList<ModelTweets> modelTweetsArrayList) {
+    public AdapterNumberCheck(Context context, ArrayList<ModelMemberClass> modelMemberClassArrayList) {
         this.context = context;
-        this.modelTweetsArrayList = modelTweetsArrayList;
-        this.filterList = modelTweetsArrayList;
+        this.modelMemberClassArrayList = modelMemberClassArrayList;
+        this.filterList = modelMemberClassArrayList;
     }
 
     @NonNull
@@ -37,14 +37,13 @@ public class AdapterNumberCheck extends RecyclerView.Adapter<AdapterNumberCheck.
     @Override
     public void onBindViewHolder(@NonNull HolderNumber holder, int position) {
 
-        ModelTweets modelTweets = modelTweetsArrayList.get(position);
+        ModelMemberClass modelMemberClass = modelMemberClassArrayList.get(position);
 
-        String one = modelTweets.getPhone();
-        String two = modelTweets.getComment();
-        String three = modelTweets.getDate_added();
-        String four = modelTweets.getEntity_name();
-        // String five=modelTweets.getName();
-        String six = modelTweets.getUpi();
+        String one = modelMemberClass.getPhone();
+        String two = modelMemberClass.getComment();
+        String three = modelMemberClass.getDate_added();
+        String four = modelMemberClass.getEntity_name();
+        String six = modelMemberClass.getUpi();
 
         String getDateNew = three;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -64,7 +63,6 @@ public class AdapterNumberCheck extends RecyclerView.Adapter<AdapterNumberCheck.
             holder.entityname.setText("Name: " + four);
         }
 
-        // holder.locname.setText("Location Name: "+five);
         holder.phone.setText("Mobile No : " + one);
         holder.comment.setText("Comment: " + two);
         holder.dateadded.setText("Date Reported: " + formattedDate);
@@ -75,7 +73,7 @@ public class AdapterNumberCheck extends RecyclerView.Adapter<AdapterNumberCheck.
 
     @Override
     public int getItemCount() {
-        return modelTweetsArrayList.size();
+        return modelMemberClassArrayList.size();
     }
 
     @Override
@@ -95,7 +93,6 @@ public class AdapterNumberCheck extends RecyclerView.Adapter<AdapterNumberCheck.
             entityname = itemView.findViewById(R.id.content);
             comment = itemView.findViewById(R.id.username);
             dateadded = itemView.findViewById(R.id.desc);
-            //locname=itemView.findViewById(R.id.locname);
             upikey = itemView.findViewById(R.id.upikey);
         }
     }

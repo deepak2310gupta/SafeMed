@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".NoInternet">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +15,8 @@
 
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
             android:src="@drawable/nointernet" />
@@ -41,7 +39,7 @@
             android:fontFamily="@font/baloo"
             android:text="Swipe Down To Refresh"
             android:textAllCaps="false"
-            android:textColor="#102EF3"
+            android:textColor="#1BABE4"
             android:textSize="20dp"
             android:textStyle="bold" />
 

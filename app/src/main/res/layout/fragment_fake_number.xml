@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#0B3867">
+            android:background="#1BABE4">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/arapey"
+                    android:fontFamily="@font/autour_one"
                     android:text="SafeMed"
                     android:textColor="@color/white"
                     android:textSize="25dp"
@@ -62,17 +62,26 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.3"
+                android:id="@+id/buttonGetResults"
                 android:background="@drawable/buttonbg"
                 android:src="@drawable/ic_baseline_search_24" />
         </LinearLayout>
 
+
         <ProgressBar
             android:id="@+id/fetchingdata"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:indeterminate="true" />
+            android:soundEffectsEnabled="true"
+            android:visibility="visible"
+            app:indicatorColor="#F8344B"
+            android:layout_marginTop="15dp"
+            app:indicatorDirectionLinear="leftToRight" />
+
+
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listRecyclerFake"

@@ -7,7 +7,7 @@
         android:id="@+id/fakeMedicine"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_medication_24"
-        android:title="Fake Medicine"
+        android:title="Authenticate Medicine"
         app:cnb_backgroundColor="#ADFDE6"
         app:cnb_iconColor="#178767"
         app:cnb_iconTintMode="src_in"
@@ -16,7 +16,7 @@
     <item
         android:id="@+id/fakeNumber"
         android:enabled="true"
-        android:title="Fake Number"
+        android:title="Authenticate Dealer"
         app:cnb_backgroundColor="#ADFDE6"
         app:cnb_iconColor="#178767"
         android:icon="@drawable/ic_baseline_phone_disabled_24"

@@ -8,10 +8,10 @@ public class FilterNumber extends Filter {
 
 
     private AdapterNumberCheck adapterNumberCheck;
-    private ArrayList<ModelTweets> filteraddList;
+    private ArrayList<ModelMemberClass> filteraddList;
 
 
-    public FilterNumber(AdapterNumberCheck adapterNumberCheck, ArrayList<ModelTweets> modelTweets) {
+    public FilterNumber(AdapterNumberCheck adapterNumberCheck, ArrayList<ModelMemberClass> modelTweets) {
         this.adapterNumberCheck = adapterNumberCheck;
         this.filteraddList = modelTweets;
     }
@@ -21,7 +21,7 @@ public class FilterNumber extends Filter {
         FilterResults filterResults = new FilterResults();
         if (constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
-            ArrayList<ModelTweets> filteredModels = new ArrayList<>();
+            ArrayList<ModelMemberClass> filteredModels = new ArrayList<>();
 
             for (int i = 0; i < filteraddList.size(); i++) {
 
@@ -44,7 +44,7 @@ public class FilterNumber extends Filter {
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
 
-        adapterNumberCheck.modelTweetsArrayList = (ArrayList<ModelTweets>) results.values;
+        adapterNumberCheck.modelMemberClassArrayList = (ArrayList<ModelMemberClass>) results.values;
         adapterNumberCheck.notifyDataSetChanged();
     }
 }

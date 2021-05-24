@@ -12,20 +12,19 @@
         android:id="@+id/collectionfragmentsReplacer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"></FrameLayout>
-
+        android:layout_weight="1" />
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/menuChipNavigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0B3867"
-        android:padding="5dp"
+        android:background="#1BABE4"
+        android:padding="6dp"
         app:cnb_badgeColor="#178767"
-        app:cnb_iconSize="20dp"
+        app:cnb_iconSize="22dp"
         app:cnb_menuResource="@menu/menudetect"
         app:cnb_orientationMode="horizontal"
-        app:cnb_radius="10dp"
+        app:cnb_radius="15dp"
         app:cnb_unselectedColor="#FFFFFF" />
 
 </LinearLayout>

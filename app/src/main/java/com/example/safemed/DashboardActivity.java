@@ -1,9 +1,9 @@
 package com.example.safemed;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
 
 import com.example.safemed.FragmentsCollections.FakeMedicineFragment;
 import com.example.safemed.FragmentsCollections.FakeNumberFragment;
@@ -18,8 +18,11 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         menuChipNavigationBar = findViewById(R.id.menuChipNavigationBar);
+
+
+
+
 
         FakeMedicineFragment fakeMedicineFragment = new FakeMedicineFragment();
         FragmentTransaction fragmentTransactionAgain1 = getSupportFragmentManager().beginTransaction();
@@ -40,13 +43,10 @@ public class DashboardActivity extends AppCompatActivity {
                         fragmentTransactionAgain2.replace(R.id.collectionfragmentsReplacer, fakeNumberFragment, "").commit();
                         break;
 
-
                 }
 
             }
         });
-
-
     }
 
 

@@ -1,17 +1,14 @@
 package com.example.safemed.FragmentsCollections;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,32 +17,36 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.safemed.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import java.io.File;
+import com.example.safemed.R;
+import com.example.safemed.ml.Mymodel;
+
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 
 public class SixthFragment extends Fragment {
-
-
     Bitmap bmp6;
     ImageView medicineimageview6;
     Button selectButton6;
     Button predictButton2;
     Uri imageFileUri6;
-    String fifthUri, fourthestUri;
-
+     ProgressDialog progressDialog;
+    double narray1[] = new double[224];
+    double narray2[] = new double[224];
+    double narray3[] = new double[224];
+    double ncomparearray[] = new double[224];
+    ImageView test4n,test5n,test6n;
     public SixthFragment() {
-        // Required empty public constructor
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,12 +55,12 @@ public class SixthFragment extends Fragment {
         medicineimageview6 = view.findViewById(R.id.medicineimageview6);
         selectButton6 = view.findViewById(R.id.selectButton6);
         predictButton2 = view.findViewById(R.id.predictButton2);
+        progressDialog=new ProgressDialog(getContext());
+        test4n=view.findViewById(R.id.test4n);
+        test5n=view.findViewById(R.id.test5n);
+        test6n=view.findViewById(R.id.test6n);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            fifthUri = getArguments().getString("uriFifth");
-            fourthestUri = getArguments().getString("uriFourth");
-        }
+
         selectButton6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,13 +69,12 @@ public class SixthFragment extends Fragment {
                 startActivityForResult(intent, 600);
             }
         });
-
         predictButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (imageFileUri6 == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("You Have To Upload The Components Image To Continue");
+                    builder.setMessage("You Have To Upload The Medicine Image To Continue");
                     builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -82,20 +82,123 @@ public class SixthFragment extends Fragment {
                         }
                     });
                     builder.create().show();
-                } else {
-                    Toast.makeText(getContext(), "UriFourth::" + fourthestUri + "UriFifth::" + fifthUri + "SixthUri::" + bmp6, Toast.LENGTH_SHORT).show();
-                    loadImages();
+                }
+                else {
+
+                    progressDialog.setTitle("Authenticating Medicine");
+                    progressDialog.setMessage("Please Wait.....");
+                    progressDialog.show();
+
+
+                    Bitmap bitmap4= ((BitmapDrawable)test4n.getDrawable()).getBitmap();
+                    Bitmap bitmap5= ((BitmapDrawable)test5n.getDrawable()).getBitmap();
+                    Bitmap bitmap6= ((BitmapDrawable)test6n.getDrawable()).getBitmap();
+                    bitmap4 = Bitmap.createScaledBitmap(bitmap4, 224, 224, true);
+                    bitmap5 = Bitmap.createScaledBitmap(bitmap5, 224, 224, true);
+                    bitmap6 = Bitmap.createScaledBitmap(bitmap6, 224, 224, true);
+
+                    try {
+                        Mymodel model = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+                        tensorImage.load(bitmap4);
+                        ByteBuffer byteBuffer = tensorImage.getBuffer();
+                        inputFeature0.loadBuffer(byteBuffer);
+                        Mymodel.Outputs outputs = model.process(inputFeature0);
+                        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            narray1[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    try {
+                        Mymodel model = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+                        tensorImage.load(bitmap5);
+                        ByteBuffer byteBuffer = tensorImage.getBuffer();
+                        inputFeature0.loadBuffer(byteBuffer);
+                        Mymodel.Outputs outputs = model.process(inputFeature0);
+                        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            narray2[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    try {
+                        Mymodel model = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+                        tensorImage.load(bitmap6);
+                        ByteBuffer byteBuffer = tensorImage.getBuffer();
+                        inputFeature0.loadBuffer(byteBuffer);
+                        Mymodel.Outputs outputs = model.process(inputFeature0);
+                        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            narray3[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    bmp6 = Bitmap.createScaledBitmap(bmp6, 224, 224, true);
+                    try {
+                        Mymodel model1 = Mymodel.newInstance(getContext());
+                        TensorBuffer inputFeature01 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                        TensorImage tensorImage1 = new TensorImage(DataType.FLOAT32);
+                        tensorImage1.load(bmp6);
+                        ByteBuffer byteBuffer1 = tensorImage1.getBuffer();
+                        inputFeature01.loadBuffer(byteBuffer1);
+                        Mymodel.Outputs outputs1 = model1.process(inputFeature01);
+                        TensorBuffer outputFeature0 = outputs1.getOutputFeature0AsTensorBuffer();
+                        for (int i = 0; i < 224; i++) {
+                            ncomparearray[i] = outputFeature0.getFloatArray()[i];
+                        }
+                        model1.close();
+
+                    }
+                    catch (IOException e) {
+
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    double myFinalAnswer1n=rmsValue(narray1,ncomparearray);
+                    double myFinalAnswer2n=rmsValue(narray2,ncomparearray);
+                    double myFinalAnswer3n=rmsValue(narray3,ncomparearray);
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("myTrainingModelValue1n",myFinalAnswer1n);
+                    bundle.putDouble("myTrainingModelValue2n",myFinalAnswer2n);
+                    bundle.putDouble("myTrainingModelValue3n",myFinalAnswer3n);
+                    ResultSecondFragment resultSecondFragment = new ResultSecondFragment();
+                    resultSecondFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.collectionfragmentsReplacer, resultSecondFragment).commit();
+                    progressDialog.dismiss();
+
+
                 }
             }
         });
-
-
         return view;
+
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 600) {
             imageFileUri6 = data.getData();
             try {
@@ -106,50 +209,24 @@ public class SixthFragment extends Fragment {
                 bmpFactoryOptions.inJustDecodeBounds = false;
                 bmp6 = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageFileUri6), null, bmpFactoryOptions);
                 medicineimageview6.setImageBitmap(bmp6);
-                Toast.makeText(getContext(), "" + bmp6, Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 Log.v("ERROR", e.toString());
             }
         }
-
-
     }
+    public static double rmsValue(double arr1[], double arr2[]) {
+        double square = 0;
+        double mean = 0;
+        double root = 0;
 
-
-    private void loadImages() {
-
-        for (int i = 1; i < 4; i++) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference("remdesivir/rem" + i + ".jpeg");
-
-            try {
-                File localFile = File.createTempFile("rem" + i, "jpeg");
-                int finalI = i;
-                storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        if (finalI == 1) {
-                            //test1.setImageBitmap(bitmap);
-                        }
-
-                        if (finalI == 2) {
-                            //test2.setImageBitmap(bitmap);
-                        }
-
-                        if (finalI == 3) {
-                            //  test3.setImageBitmap(bitmap);
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+        for (int i = 0; i < 224; i++) {
+            square += Math.pow((arr1[i] - arr2[i]), 2);
         }
+
+        root = (float) Math.sqrt(mean);
+
+        return root;
     }
+
+
 }

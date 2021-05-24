@@ -1,37 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SplashActivity">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:id="@+id/cardSplash"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
 
         <ImageView
+            android:id="@+id/SafeMedImage"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:layout_centerInParent="true"
-            android:padding="0dp"
+            android:layout_margin="10dp"
             android:src="@drawable/splashimage" />
 
         <TextView
-            android:id="@+id/titleforApp"
+            android:id="@+id/SafeMedTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/SafeMedImage"
+            android:layout_margin="10dp"
             android:fontFamily="@font/autour_one"
             android:text="SafeMed"
             android:textAlignment="center"
-            android:textColor="#F42A49"
-            android:textSize="40dp"
+            android:textColor="#FF3E5B"
+            android:textSize="45dp"
             android:textStyle="bold" />
-    </LinearLayout>
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SafeMedTitle"
+            android:textAlignment="center"
+            android:textColor="#256A9F"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:fontFamily="@font/autour_one"
+            android:text="Be Safe From Fake"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
+

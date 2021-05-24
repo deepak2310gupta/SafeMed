@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.safemed.FragmentsCollections.FourthFragment;
 import com.example.safemed.R;
 
 public class MedicineDetectionSecondFragment extends Fragment {
@@ -24,8 +23,8 @@ public class MedicineDetectionSecondFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_medicine_detection_second, container, false);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        FourthFragment fourthFragment = new FourthFragment();
-        ft.replace(R.id.collectionfragmentsReplacer, fourthFragment);
+        SixthFragment sixthFragment = new SixthFragment();
+        ft.replace(R.id.collectionfragmentsReplacer, sixthFragment);
         ft.commit();
         return view;
     }

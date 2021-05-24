@@ -12,18 +12,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
-
-    TextView titleforApp;
-    Handler handler;
+    TextView SafeMedTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        titleforApp = findViewById(R.id.titleforApp);
+        SafeMedTitle = findViewById(R.id.SafeMedTitle);
 
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
@@ -35,23 +32,17 @@ public class SplashActivity extends AppCompatActivity {
                     Intent intent = new Intent(SplashActivity.this, NoInternet.class);
                     startActivity(intent);
                 }
-
             }
-        }, 3200);
-
+        }, 3105);
         Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
         findViewById(R.id.cardSplash).startAnimation(animZoomIn);
-
     }
-
 
     private boolean haveNetwork() {
         boolean haveWiFi = false;
         boolean haveMobileData = false;
-
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
-
         for (NetworkInfo info : networkInfos) {
             if (info.getTypeName().equalsIgnoreCase("WIFI")) {
                 if (info.isConnected())
@@ -61,7 +52,6 @@ public class SplashActivity extends AppCompatActivity {
                 if (info.isConnected())
                     haveMobileData = true;
             }
-
         }
         return haveMobileData | haveWiFi;
     }

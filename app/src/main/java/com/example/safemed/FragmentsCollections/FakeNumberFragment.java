@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.safemed.AdapterNumberCheck;
-import com.example.safemed.ModelTweets;
+import com.example.safemed.ModelMemberClass;
 import com.example.safemed.R;
 
 import org.json.JSONArray;
@@ -36,14 +37,15 @@ public class FakeNumberFragment extends Fragment {
 
 
     public FakeNumberFragment() {
-        // Required empty public constructor
+
     }
 
     AdapterNumberCheck adapterNumberCheck;
     RecyclerView listRecyclerFake;
-    ArrayList<ModelTweets> modelTweetsArrayList;
+    ArrayList<ModelMemberClass> modelMemberClassArrayList;
     EditText searchNumber;
     TextView txtSafeMed;
+    ImageButton buttonGetResults;
     ProgressBar fetchingdata;
 
 
@@ -53,12 +55,16 @@ public class FakeNumberFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fake_number, container, false);
         listRecyclerFake = view.findViewById(R.id.listRecyclerFake);
         txtSafeMed = view.findViewById(R.id.txtSafeMed);
-        fetchingdata = view.findViewById(R.id.fetchingdata);
+        buttonGetResults=view.findViewById(R.id.buttonGetResults);
+         fetchingdata = view.findViewById(R.id.fetchingdata);
         searchNumber = view.findViewById(R.id.searchNumber);
-        modelTweetsArrayList = new ArrayList<>();
-        modelTweetsArrayList.clear();
+        modelMemberClassArrayList = new ArrayList<>();
+        modelMemberClassArrayList.clear();
+
 
         loadAllFakedDetails();
+
+
 
         searchNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,6 +75,7 @@ public class FakeNumberFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
+
                     adapterNumberCheck.getFilter().filter(s);
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -80,12 +87,16 @@ public class FakeNumberFragment extends Fragment {
             }
 
         });
-        return view;
+
+
+     return view;
+
     }
 
     private void loadAllFakedDetails() {
 
         fetchingdata.setVisibility(View.VISIBLE);
+        fetchingdata.setIndeterminate(true);
         String url = "https://api.cov.social/v1/info/findFraud";
         StringRequest stringRequestNews = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -94,20 +105,18 @@ public class FakeNumberFragment extends Fragment {
                 try {
 
                     JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0; i < jsonArray.length(); i++) {
+                    for (int i = 0; i < 25; i++) {
 
                         try {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
                             String one = jsonObject1.getString("phone");
                             String two = jsonObject1.getString("_id");
                             String three = jsonObject1.getString("upi");
                             String four = jsonObject1.getString("comment");
                             String five = jsonObject1.getString("entity_name");
                             String six = jsonObject1.getString("date_added");
-                            // String seven=jsonObject1.getJSONObject("region").getString("name");
 
-                            ModelTweets modelTweets = new ModelTweets(
+                            ModelMemberClass modelMemberClass = new ModelMemberClass(
                                     "" + one,
                                     "" + two,
                                     "" + three,
@@ -115,14 +124,12 @@ public class FakeNumberFragment extends Fragment {
                                     "" + five,
                                     "" + six);
 
-                            modelTweetsArrayList.add(modelTweets);
-
-
+                            modelMemberClassArrayList.add(modelMemberClass);
                         } catch (Exception e) {
                             Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
-                    adapterNumberCheck = new AdapterNumberCheck(getContext(), modelTweetsArrayList);
+                    adapterNumberCheck = new AdapterNumberCheck(getContext(), modelMemberClassArrayList);
                     listRecyclerFake.setAdapter(adapterNumberCheck);
                     adapterNumberCheck.notifyDataSetChanged();
                     fetchingdata.setVisibility(View.GONE);
