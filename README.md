@@ -71,7 +71,7 @@ We are accessing the database of below mentioned website using API.
  [Process flow of system](https://embed.creately.com/IraYDEStVeW?type=svg)
  
  ## Data Flow Diagram
- ![]('DFD%20EYHC.png')
+ ![](DFD%20EYHC.png)
  
 
         
