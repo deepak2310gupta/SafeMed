@@ -71,6 +71,8 @@ We are accessing the database of below mentioned website using API.
  It is a volunteer driven intiative where a person can post the information of a fake dealer along with the fake promises that the dealer is making to dupe a person.
  
  We are accessing the data and using filters in java we are providing the facility to user to verify the dealer.
+ ## Process Flow Diagram
+ [Process flow of system]<img src="https://embed.creately.com/IraYDEStVeW?type=svg">
  
 
         
