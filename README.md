@@ -72,7 +72,7 @@ We are accessing the database of below mentioned website using API.
  
  We are accessing the data and using filters in java we are providing the facility to user to verify the dealer.
  ## Process Flow Diagram
- [Process flow of system]<img src="https://embed.creately.com/IraYDEStVeW?type=svg">
+ [Process flow of system](https://embed.creately.com/IraYDEStVeW?type=svg)
  
 
         
