@@ -47,11 +47,7 @@
      * *Training Accuracy* - 82%
      * *Validation Accuracy* - 80%
          
- #### Example of working model to solve first two problems:
-
-     
-
-
+ 
 #### Impoartan Features of our model:
   One-Shot Learning : Our model is able to correctly predicting the similarity of between the images of new classes.
   
