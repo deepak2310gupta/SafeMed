@@ -49,9 +49,23 @@
          
  
 #### Impoartan Features of our model:
-  One-Shot Learning : Our model is able to correctly predicting the similarity of between the images of new classes.
+  One-Shot Learning : Our model is able to classify the similar image and dissimilar image of new classes correctly.
   
   Flexibility : Our model is invariant to changes is light, and slight rotation.
+  
+  Explanantion of solution through an example:
+  Remdesevir is manufactured by two approved brands of India.These companies sell remdesevir in three different types packeges.
+  Now if a user input an image of packet of a remdesivir drug.Our application will find embedding of this image,will calculate the distance between the embedding of user image and original images of approved brands.
+  There can be three scenerios:
+  
+  1.If user medcine is fake:
+    We found that in such cases all the distances are greater than threshold by large margin
+    
+  2.If user medicine is Counterfiet:
+    We found that in such cases all the distances are greater than threshold with not so very small margin.
+  
+  3.If user image is Genuine:
+    We found that in such cases at least one of the distance is less than threshold .
 
 ### Solution of 3rd Problem:
 
@@ -69,9 +83,6 @@ We are accessing the database of below mentioned website using API.
  We are accessing the data and using filters in java we are providing the facility to user to verify the dealer.
  ## Process Flow Diagram
  [Process flow of system](https://embed.creately.com/IraYDEStVeW?type=svg)
- 
- ## Data Flow Diagram
- ![](DFD%20EYHC.png)
  
 
         
