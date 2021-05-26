@@ -34,7 +34,13 @@
         
   3. Dataset includes such images  that for each image, there are  images in dataset that looks very similar to it but have different class which was useful for making model train hard.
   
-        
+  Example of training data(both images are of different classes):
+  
+  ![](Image_class1.png)
+  ![](Image_class2.png)
+  
+   [Link of Training Data](https://drive.google.com/drive/folders/1wXMFgge4Ec_Bn2RCr2tcqV-xc4VrJ7pR?usp=sharing)
+   
   4. Image per classes is made 30 by using data augmentation.Augmentation operation includes changing brightness,shear,rotation,  shifting.Images are augmented very slightly in such a way that they look like real image with some changes occured during taking their images though camera in general.
         
   5. Augmenation is not applied on validation data.
@@ -73,7 +79,7 @@
 
 #### Idea
 
-We observed that people generally post the information about fake dealer on twitter and some other website that collects such data to aware other people to not to approach them. So, our idea is to access data from such websites and providing the facility of verifying the dealer by searching by inputting phone number or UPI of the dealer.
+We observed that people generally post the information about fake dealer on twitter and some other website that collects such data to aware other people to not to approach them. So, our idea is to access data from such websites and providing the facility of verifying the dealer by searching using phone number or UPI of the dealer as input.
 
 #### Idea Implementation
 We are accessing the database of below mentioned website using API.
