@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivitesCollection.SplashActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/cardSplash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/SafeMedImage"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/splashimage" />
+
+        <TextView
+            android:id="@+id/SafeMedTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SafeMedImage"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/autour_one"
+            android:text="SafeMed"
+            android:textAlignment="center"
+            android:textColor="#FF3E5B"
+            android:textSize="45dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SafeMedTitle"
+            android:textAlignment="center"
+            android:textColor="#256A9F"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:fontFamily="@font/autour_one"
+            android:text="Be Safe From Fake"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Title"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="UsernameTwiiter"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Content"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Description "
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+
+                <!-- <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_margin="2dp"
+                     android:fontFamily="@font/asap_medium"
+                     android:textColor="@color/black"
+                     android:textSize="14dp"
+                     android:text="Location Name"
+                     android:id="@+id/locname"/>
+
+                     -->
+
+
+                <TextView
+                    android:id="@+id/upikey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="UPI Id"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
