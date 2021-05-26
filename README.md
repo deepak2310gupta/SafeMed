@@ -1,14 +1,14 @@
  # SafeMed
-  This is a android app to prevent users from using counterfiet medcines and also to contact fake dealers for essentials.
+  This is a android app to prevent users from using counterfiet medcines and also prevent users from contacting fake dealers for essentials.
 
 ## Description
   ### Problem Statement
 
-  In the present time, essentials like viral drugs, oxygen contrators etc. are in very high demand.There this shortage of these essentias in legal market because of less production in comparison to demand. So, desparate families of covid patients are approaching black market to buy the above mentioned essentials.Buying essentials from these market can cause major problems:
+  In the present time, essentials like viral drugs, oxygen contrators etc. are in very high demand.There is shortage of these essentias in legal market because of less production in comparison to demand. So, desparate families of covid patients are approaching black market to buy the above mentioned essentials.Buying essentials from these market can cause major problems:
 
   1. Buyer can get a counterfiet medicine.
   2. Buyer can get a medicine of brand that are not approved by government(Fake Medicines).
-  3. Buyer can be duped by a dealer making fake promises of providing essentials.
+  3. Buyer can be duped by a dealer by making fake promises of providing essentials.
 
   ### Proposed Solution
 
@@ -16,7 +16,7 @@
 
   #### Idea
 
-  We have observed that counterfiet medcines have some dissimilarities in their packaging style as comapred original medicine packet.For example, gaping between letters , colour sharpnes , thickness of letters etc.These differences are so minimal that it is not observable to buyer. While in fake medicines these differences are observable but buyer buys these medicines beacuse of less awareness about approved medicines of particular type.
+  We have observed that counterfiet medicines have some dissimilarities in their packaging style as comapred original medicine packet.For example, gaping between letters , colour sharpnes , thickness of letters etc.These differences are so minimal that it is not observable to buyer. While in fake medicines these differences are observable but buyer buys these medicines because of less awareness about approved medicines of particular type(type here refrencing to generic name).
 
   So we are proposing an idea to differentiate between original medicines of approved brand names and fake or counterfiet medicines by detecting the differences between their packaging using Deep Learning.
 
@@ -32,34 +32,36 @@
         
   2. One image per class has been obtained through google.
         
-  3. Dataset includes such images  that for each image, there are such images in dataset that looks very similar to it but have .different class which was useful for making model train hard.
+  3. Dataset includes such images  that for each image, there are  images in dataset that looks very similar to it but have different class which was useful for making model train hard.
+  
         
   4. Image per classes is made 30 by using data augmentation.Augmentation operation includes changing brightness,shear,rotation,  shifting.Images are augmented very slightly in such a way that they look like real image with some changes occured during taking their images though camera in general.
         
   5. Augmenation is not applied on validation data.
         
-  6. We have used Google **Exception** pretrained model trained on Imagenet Dataset.
+  6. We have used Google **Xception** pretrained model trained on Imagenet Dataset.
         
   7. SemiHardTriplet Loss is used as a metric for optimization during training of model.
         
     
   8. Result with above mentioned dataset:
-     * *Training Accuracy* - 82%
-     * *Validation Accuracy* - 80%
+     * *Highest Training Accuracy Obtained* - 82%
+     * *Highest Validation Accuracy Obtained* - 80%
          
  
 #### Impoartan Features of our model:
   One-Shot Learning : Our model is able to classify the similar image and dissimilar image of new classes correctly.
   
-  Flexibility : Our model is invariant to changes is light, and slight rotation.
+  Flexibility : Our model is invariant to changes in light, and slight rotation.
   
   Explanantion of solution through an example:
-  Remdesevir is manufactured by two approved brands of India.These companies sell remdesevir in three different types packeges.
+  
+  Remdesevir is manufactured by two approved brands of India.These companies sell remdesevir in three different types packages.
   Now if a user input an image of packet of a remdesivir drug.Our application will find embedding of this image,will calculate the distance between the embedding of user image and original images of approved brands.
   There can be three scenerios:
   
   1.If user medcine is fake:
-    We found that in such cases all the distances are greater than threshold by large margin
+    We found that in such cases all the distances are greater than threshold by large margin.
     
   2.If user medicine is Counterfiet:
     We found that in such cases all the distances are greater than threshold with not so very small margin.
@@ -78,7 +80,7 @@ We are accessing the database of below mentioned website using API.
 
  [Website Link](https://cov.social/#/) 
  
- It is a volunteer driven intiative where a person can post the information of a fake dealer along with the fake promises that the dealer is making to dupe a person.
+ This website is a volunteer driven intiative where a person can post the information of a fake dealer along with the fake promises that the dealer is making to dupe a person.
  
  We are accessing the data and using filters in java we are providing the facility to user to verify the dealer.
  ## Process Flow Diagram
