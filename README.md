@@ -74,6 +74,8 @@
   
   3.If user image is Genuine:
     We found that in such cases at least one of the distance is less than threshold .
+    
+### To load and test our model go to [Fake-Medicine-Detector repository](https://github.com/Sauravpandey98/Fake-Medicine-Detector) .
 
 ### Solution of 3rd Problem:
 
