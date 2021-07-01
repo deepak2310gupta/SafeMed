@@ -56,7 +56,7 @@
          
  
 #### Impoartan Features of our model:
-  **One-Shot Learning**: Our model is able to classify the similar image and dissimilar image of new classes correctly.
+  **One-Shot Learning**: Our model is able to classify the similar image and dissimilar images of new classes correctly.
   
   **Flexibility** : Our model is invariant to changes in light, and slight rotation.
   
