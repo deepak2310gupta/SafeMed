@@ -1,5 +1,5 @@
  # SafeMed
-  This is a android app to prevent users from using counterfiet medcines and also prevent users from contacting fake dealers for essentials.
+  This is a android app to prevent users from using counterfiet medcines and also prevent users from contacting fake dealers for essentials.This project was declared winner of the [eYantra Covid Hackathon 2021](http://hackathon.e-yantra.org/result) in innovative category.
  
  # Demonstration of Working of app
   [**Demonstration Video**](https://youtu.be/XQbrCLEiM-I?t=121)
